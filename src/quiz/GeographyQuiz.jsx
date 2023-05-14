@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './style.scss';
 const GeographyQuiz = () => {
+  // вопросы
   const [questions, setQuestions] = useState([
     {
       index: 0,
@@ -195,30 +196,26 @@ const GeographyQuiz = () => {
     },
   ]);
 
+  // текущий вопрос
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  // флаг, показать ли результат
   const [showScore, setShowScore] = useState(false);
-  const [score, setScore] = useState(0);
-
-  const handleNextQuestion = () => {
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion);
-    } else {
-      setShowScore(true);
-    }
-  };
 
   return (
+    // основная обертка
     <div className="wrap">
       {!showScore ? (
         <div className="subWrap">
+          {/* раздел, где есть фотография и табло с очками */}
           <div className="firstrow">
+            {/* фотография */}
             <div className="image-section">
               <img className="img-class" src={questions[currentQuestion].image} alt="" />
             </div>
+            {/* табло с очками */}
             <div className="points-section">
               <div className="left-point-sec">
-                {currentQuestion <= 10
+                {currentQuestion < 10
                   ? questions.slice(0, 5).map((elem) => {
                       return (
                         <div className="point-sec-elem">
@@ -241,7 +238,7 @@ const GeographyQuiz = () => {
                     })}
               </div>
               <div className="right-point-sec">
-                {currentQuestion <= 10
+                {currentQuestion < 10
                   ? questions.slice(5, 10).map((elem) => {
                       return (
                         <div className="point-sec-elem">
@@ -265,6 +262,7 @@ const GeographyQuiz = () => {
               </div>
             </div>
           </div>
+          {/* раздел с вопросом */}
           <div className="secondrow">
             <div className="question-wrap">
               <div className="leftquestionelem">
@@ -278,7 +276,9 @@ const GeographyQuiz = () => {
               </div>
             </div>
           </div>
+          {/* раздел с вариантами ответов */}
           <div className="thirdrow">
+            {/* верхние ответы */}
             <div className="rowanswer-1">
               <div className="answerelem-1">
                 <div className="answerelem-1-top"></div>
@@ -323,9 +323,9 @@ const GeographyQuiz = () => {
                 <div className="answerelem-5-bottom"></div>
               </div>
             </div>
-
+            {/* текущий раунд */}
             <div className="round">{currentQuestion + 1}</div>
-
+            {/* нижние ответы */}
             <div className="rowanswer-2">
               <div className="answerelem-1">
                 <div className="answerelem-1-top"></div>
@@ -373,6 +373,7 @@ const GeographyQuiz = () => {
           </div>
         </div>
       ) : (
+        // страница с результатом
         <div className="result-page">
           <div>{`Результат: ${
             currentQuestion == 0 ? 0 : questions[currentQuestion - 1].price
