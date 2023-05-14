@@ -200,6 +200,8 @@ const GeographyQuiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   // флаг, показать ли результат
   const [showScore, setShowScore] = useState(false);
+  //текущие очки
+  const [score, setScore] = useState(0);
 
   return (
     // основная обертка
@@ -287,6 +289,7 @@ const GeographyQuiz = () => {
               <div
                 onClick={() => {
                   if (questions[currentQuestion].answer == questions[currentQuestion].options[0]) {
+                    setScore(questions[currentQuestion].price);
                     if (currentQuestion != 19) {
                       setCurrentQuestion(currentQuestion + 1);
                     } else {
@@ -306,6 +309,7 @@ const GeographyQuiz = () => {
               <div
                 onClick={() => {
                   if (questions[currentQuestion].answer == questions[currentQuestion].options[1]) {
+                    setScore(questions[currentQuestion].price);
                     if (currentQuestion != 19) {
                       setCurrentQuestion(currentQuestion + 1);
                     } else {
@@ -334,6 +338,7 @@ const GeographyQuiz = () => {
               <div
                 onClick={() => {
                   if (questions[currentQuestion].answer == questions[currentQuestion].options[2]) {
+                    setScore(questions[currentQuestion].price);
                     if (currentQuestion != 19) {
                       setCurrentQuestion(currentQuestion + 1);
                     } else {
@@ -353,6 +358,7 @@ const GeographyQuiz = () => {
               <div
                 onClick={() => {
                   if (questions[currentQuestion].answer == questions[currentQuestion].options[3]) {
+                    setScore(questions[currentQuestion].price);
                     if (currentQuestion != 19) {
                       setCurrentQuestion(currentQuestion + 1);
                     } else {
@@ -376,12 +382,14 @@ const GeographyQuiz = () => {
         // страница с результатом
         <div className="result-page">
           <div>{`Результат: ${
-            currentQuestion == 0 ? 0 : questions[currentQuestion - 1].price
+            // currentQuestion == 0 ? 0 : questions[currentQuestion - 1].price
+            score
           } баллов`}</div>
           <div>
             <div
               onClick={() => {
                 setCurrentQuestion(0);
+                setScore(0);
                 setShowScore(false);
               }}
               className="buttonAgain">
